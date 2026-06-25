@@ -23,43 +23,103 @@ type Movie = {
   poster?: string;
 };
 
-// Real TMDB poster paths for well-known films (w342 size).
+// Real TMDB poster paths for every movie in the current list (w342 size).
 const P = (path: string) => `https://image.tmdb.org/t/p/w342${path}`;
 const POSTERS: Record<number, string> = {
-  1: P("/rnUFy7QqRfqLk1QrxnhSjxmI9jE.jpg"),   // Baahubali
-  2: P("/8Z5ms3yK0Vc16kY0AAOnDhWUkS5.jpg"),   // Baahubali 2
-  8: P("/wQs9NUR9swULsBRyqOZdL1qd3pj.jpg"),   // Rangasthalam
-  10: P("/3UoojiTuFnoFEnBO0YOTHeOpZNs.jpg"),  // Eega
-  21: P("/nEufeZlyAOLqO2brrs0yeF1lgXO.jpg"),  // RRR
-  22: P("/uVkBLF2sxoCgIyDmMARkkmuVRWS.jpg"),  // Sita Ramam
-  25: P("/dRcnyYsRfqLk7HpVT8FfqaUu0Yr.jpg"),  // Salaar
-  30: P("/66A9MqXOyVFCssoloscw79z8Tew.jpg"),  // 3 Idiots
-  31: P("/cnt5BfPaAve9JsxtZQvTKvkeOMa.jpg"),  // Dangal
-  32: P("/dKn4ULZpa4tNNAVKfQ5LznRyOyU.jpg"),  // PK
-  33: P("/5XYQEZe3Av0HwPp4VsdHa1uTeJ.jpg"),   // Lagaan
-  36: P("/hu40Uxp9WtpL34jv3zyWLb5zEVY.jpg"),  // Taare Zameen Par
-  40: P("/9o8XOaP9KAkLDExjOIzcOMqQQYS.jpg"),  // Kuch Kuch Hota Hai
-  50: P("/jqyYU1tCNZmbCFRZ4Vw2ZK1nLPK.jpg"),  // Pathaan
-  51: P("/dQS5BcYBpAYHk3lhULRyR9JJ45h.jpg"),  // Jawan
-  52: P("/jpgWb6BHIWKzcuc9MzGzPLpAzbS.jpg"),  // Animal
-  54: P("/2WTfYemtmEgTNyhmH4nuLzYAGTI.jpg"),  // 12th Fail
-  60: P("/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"),  // Shawshank
-  61: P("/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg"),  // Forrest Gump
-  62: P("/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"),  // Titanic
-  63: P("/ehGpN04mLJtaSdle1jrAjJFOJI4.jpg"),  // Gladiator
-  64: P("/qJ2tW6WMUDux911r6m7haRef0WH.jpg"),  // Dark Knight
-  65: P("/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg"),  // Inception
-  66: P("/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"),  // Interstellar
-  70: P("/3Cnu8WhTrPyhU2CCNTPzPwUgT9N.jpg"),  // Fault in Our Stars
-  75: P("/qca5iSoIp6h6CVTwt5RsS0DJBN.jpg"),   // The Notebook
-  80: P("/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"),  // Oppenheimer
-  81: P("/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg"),  // Barbie
-  82: P("/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg"),  // Dune Part Two
-  84: P("/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"),  // Avatar 2
-  110: P("/4d4d33Mtg4FNRkPb6CV0Z0sBxg.jpg"),  // Drishyam
-  130: P("/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"), // Parasite
-  131: P("/qx7r1vyl1HrTHzwhrIQNQVk5VLz.jpg"), // Train to Busan
-  134: P("/pWDtjs568ZfOTMbURQBYuT4Qxka.jpg"), // Oldboy
+  1: P("/9BAjt8nSSms62uOVYn1t3C3dVto.jpg"),
+  2: P("/21sC2assImQIYCEDA84Qh9d1RsK.jpg"),
+  3: P("/xK7MEV56GF291VG0U5XnVJuvNv3.jpg"),
+  4: P("/rQ8NH5f3CxRrmqZWMZNYPwLmjDS.jpg"),
+  5: P("/AlopJ5sUgsf0pFn8FfXqdhyfL2Z.jpg"),
+  6: P("/rsQbJT4vjyQe6Mpry1i8Tnf86wp.jpg"),
+  7: P("/iXsJEdk1P3V2cm2TSRBuG8ZS1pz.jpg"),
+  8: P("/yiEzDgBBFC25Zd6z0r7sMngn5vr.jpg"),
+  9: P("/qFUbOoWWMqx4TiVqadxlhyUMfIf.jpg"),
+  10: P("/pX7fn4EZrg2YFlV4GNMIfHDOQZ6.jpg"),
+  11: P("/sepIwNPCEhkKvFOQSjXK6tekkjR.jpg"),
+  12: P("/6D3TKts3ZLhl9xcax9Crt9KEMbW.jpg"),
+  13: P("/zMfB7i1KSyaEbJWX2selBPCcG8Z.jpg"),
+  14: P("/w6mHYrsmDK9EZh75JcFwv5xGJDO.jpg"),
+  15: P("/7Y9sZji8wsI5r4gOVBnb6CLBzrQ.jpg"),
+  16: P("/wEDh02aLl2fkCXi25V4MOOuEuWF.jpg"),
+  17: P("/qp67ixTkVd4MEhMZhGorFoOXRxl.jpg"),
+  18: P("/c7YQQAg2oX3RlHgdG4JBFn2HOHC.jpg"),
+  19: P("/c6P4zWRUbyoknRSBr1LUR3rzJX9.jpg"),
+  20: P("/xswkOJni9tJYda2yN1QQtgBVaVJ.jpg"),
+  21: P("/u0XUBNQWlOvrh0Gd97ARGpIkL0.jpg"),
+  22: P("/t1O94ZBzsQXJihtVkrsStRLyUDR.jpg"),
+  23: P("/hhMLtq9m1aK0dpY9Wcq26XeDH2z.jpg"),
+  24: P("/4OTVoCVXa5aHDZl8opKoIV9Ezr5.jpg"),
+  25: P("/hD0iBcmNIbXLVle5NoCnKF1hpQo.jpg"),
+  26: P("/Awj3a9EGjNGrEFAQ9iBmF6gBnJ9.jpg"),
+  30: P("/66A9MqXOyVFCssoloscw79z8Tew.jpg"),
+  31: P("/jLiA1WW3kL1K9lYfYmVj57RD74N.jpg"),
+  32: P("/z2x2Y4tncefsIU7h82gmUM5vnBJ.jpg"),
+  33: P("/yNX9lFRAFeNLNRIXdqZK9gYrYKa.jpg"),
+  34: P("/yUSL24kpHc9Nls4Pohia4shgcIM.jpg"),
+  35: P("/f1bF8CHzEu621bPSIg6XiUNAabh.jpg"),
+  36: P("/pRkd0DUqCDbqD9EnqleM4Wtc8v0.jpg"),
+  40: P("/5FmtHHDGPofW5Zjns1EM1D8503c.jpg"),
+  41: P("/g0bIMJRQyibCEaGy8V48VviFVKM.jpg"),
+  42: P("/em39H81XLCDgXsI7V4IcBZseEO6.jpg"),
+  43: P("/yQIph97KwXmMiXu1kOWPj065P8J.jpg"),
+  44: P("/dDsYaBazrYKg9bv8qgsEohZQMat.jpg"),
+  45: P("/kb8L9BvXQu2l6KXHCPuhgt0i9O3.jpg"),
+  46: P("/wQd1RaaMfLFcLiDD9UEo4pdoTHq.jpg"),
+  50: P("/arf00BkwvXo0CFKbaD9OpqdE4Nu.jpg"),
+  51: P("/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg"),
+  52: P("/hr9rjR3J0xBBKmlJ4n3gHId9ccx.jpg"),
+  53: P("/kPRb1mbVHGop0egQ7153y0lhzGL.jpg"),
+  54: P("/eebUPRI4Z5e1Z7Hev4JZAwMIFkX.jpg"),
+  60: P("/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"),
+  61: P("/Cw4hIUIAmSYfK9QfaUW5igp9La.jpg"),
+  62: P("/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"),
+  63: P("/wN2xWp1eIwCKOD0BHTcErTBv1Uq.jpg"),
+  64: P("/qJ2tW6WMUDux911r6m7haRef0WH.jpg"),
+  65: P("/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg"),
+  66: P("/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg"),
+  70: P("/kcVuktIlrn9SAN1uBmPDnocTQmF.jpg"),
+  71: P("/kreTuJBkUjVWePRfhHZuYfhNE1T.jpg"),
+  72: P("/snIsqVPmlu4LPjvToHpDotxa7Eh.jpg"),
+  73: P("/u3B2YKUjWABcxXZ6Nm9h10hLUbh.jpg"),
+  74: P("/hKHZhUbIyUAjcSrqJThFGYIR6kI.jpg"),
+  75: P("/rNzQyW4f8B8cQeg7Dgj3n6eT5k9.jpg"),
+  80: P("/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"),
+  81: P("/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg"),
+  82: P("/heM4XKC0jA8fTSNe8F7oUkcJV7Z.jpg"),
+  83: P("/wXqWR7dHncNRbxoEGybEy7QTe9h.jpg"),
+  84: P("/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"),
+  90: P("/hai6CSCLxULO1RThjDP3lWAqOtQ.jpg"),
+  91: P("/rYttVZsngTbaS2ElxDiIiQ32RbL.jpg"),
+  92: P("/fT9m4g5aWvwNVjHf0cUTqtTLJvh.jpg"),
+  93: P("/c171LQMyHtULZC0RmuIHiiFDOjv.jpg"),
+  94: P("/hOF9CgPsy9aLr5GJEBESC8MEXFy.jpg"),
+  95: P("/y2qHivDbnmndHGw3iNhw1LPZIpM.jpg"),
+  96: P("/gSOVog7ydsaF1YpgAqBqnKYFGY.jpg"),
+  100: P("/c7YQQAg2oX3RlHgdG4JBFn2HOHC.jpg"),
+  101: P("/3PxkiDTObsws7pzkdUiHCjOxVA4.jpg"),
+  102: P("/wfMgsfDrtouYOM6MbrkHtU96Xij.jpg"),
+  103: P("/gRS90yn20ZMlq4pvVQjtUM5DLqN.jpg"),
+  104: P("/kOf1FpQurlSakT5zSRCpCCgymVv.jpg"),
+  105: P("/uHxsoJuYnmH3owTCyVhwNpsLWMR.jpg"),
+  110: P("/456FlpiU1iOBnaOxSd783QhZKWw.jpg"),
+  111: P("/8RJBCUGE27LX06tAES4jTELN0KA.jpg"),
+  112: P("/iFMyZw1DTGvZ8hPa0eTseSFiRT1.jpg"),
+  113: P("/wfMgsfDrtouYOM6MbrkHtU96Xij.jpg"),
+  114: P("/lJ3RvIirE2C7gdBKvPRaoQ3iCo2.jpg"),
+  115: P("/ekZobS8isE6mA53RAiGDG93hBxL.jpg"),
+  116: P("/bswrtewwthpsh6nABiqKevU4UBI.jpg"),
+  120: P("/7AxJYvPWLlNiGH52A9eenDxQzu8.jpg"),
+  121: P("/cyYwkXW1vd3YpiFVlb7y0hgIzuu.jpg"),
+  122: P("/pJnwpWxAFMexmQrasF5oEQir0c3.jpg"),
+  130: P("/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"),
+  131: P("/vNVFt6dtcqnI7hqa6LFBUibuFiw.jpg"),
+  132: P("/oHlM4abRm6BzrRcz9Nup1uidw9H.jpg"),
+  133: P("/zVSpYSuACSvqLDBFL35ZmlWDzQU.jpg"),
+  134: P("/pWDtjs568ZfOTMbURQBYuT4Qxka.jpg"),
+  140: P("/7yaF5BOtPjQH8JDSSiVbzdrsWM4.jpg"),
+  141: P("/hg45ijXtBiDBPbWE5vvgLUXGPC6.jpg"),
+  142: P("/8gaIw26YFGVreCBME1dyjozpWkz.jpg"),
 };
 
 
