@@ -438,7 +438,7 @@ function Index() {
       </section>
 
       <footer className="mt-8 border-t border-border py-6 text-center text-xs text-muted-foreground">
-        Internship Project · CineMatch Movie Recommender
+        © 2026 CineMatch by Nithin Kumar
       </footer>
     </div>
   );
