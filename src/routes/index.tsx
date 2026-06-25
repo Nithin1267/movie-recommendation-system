@@ -197,6 +197,8 @@ const CAT_LABELS: Record<Category, string> = {
 };
 
 function Poster({ movie }: { movie: Movie }) {
+  const [errored, setErrored] = useState(false);
+  const url = POSTERS[movie.id];
   const initials = movie.title
     .replace(/[()]/g, "")
     .split(" ")
@@ -205,6 +207,19 @@ function Poster({ movie }: { movie: Movie }) {
     .map((w) => w[0])
     .join("")
     .toUpperCase();
+
+  if (url && !errored) {
+    return (
+      <img
+        src={url}
+        alt={`${movie.title} poster`}
+        loading="lazy"
+        onError={() => setErrored(true)}
+        className="h-full w-full object-cover transition group-hover:scale-105"
+      />
+    );
+  }
+
   return (
     <div
       className={`flex h-full w-full flex-col items-center justify-center bg-gradient-to-br ${LANG_COLORS[movie.language]} p-3 text-center`}
@@ -221,6 +236,7 @@ function Poster({ movie }: { movie: Movie }) {
     </div>
   );
 }
+
 
 function Index() {
   const [language, setLanguage] = useState<"All" | Language>("All");
