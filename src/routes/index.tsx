@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+type Theme = "light" | "dark" | "rose";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -303,6 +305,19 @@ function Index() {
   const [category, setCategory] = useState<"All" | Category>("All");
   const [sort, setSort] = useState("default");
   const [query, setQuery] = useState("");
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    const saved = (typeof window !== "undefined" && localStorage.getItem("cm-theme")) as Theme | null;
+    if (saved) setTheme(saved);
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("light", "dark", "rose");
+    root.classList.add(theme);
+    localStorage.setItem("cm-theme", theme);
+  }, [theme]);
 
   const languages: ("All" | Language)[] = ["All", "Telugu", "Hindi", "English", "Tamil", "Malayalam", "Korean"];
   const categories: ("All" | Category)[] = ["All", "Classics", "Love", "Recent"];
@@ -325,11 +340,25 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card">
-        <div className="mx-auto max-w-6xl px-6 py-6">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">🎬 CineMatch</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Movie recommendations across Telugu, Hindi, English, Tamil, Malayalam & Korean cinema.
-          </p>
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-6">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">🎬 CineMatch</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Movie recommendations across Telugu, Hindi, English, Tamil, Malayalam & Korean cinema.
+            </p>
+          </div>
+          <div className="flex flex-col">
+            <label className="mb-1 text-xs font-medium text-muted-foreground">Theme</label>
+            <select
+              value={theme}
+              onChange={(e) => setTheme(e.target.value as Theme)}
+              className="rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              <option value="light">☀️ Light</option>
+              <option value="dark">🌙 Dark</option>
+              <option value="rose">🌸 Rose Lavender</option>
+            </select>
+          </div>
         </div>
       </header>
 
