@@ -166,6 +166,7 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    transition: background-color 400ms ease, border-color 400ms ease, color 400ms ease, fill 400ms ease, stroke 400ms ease, box-shadow 400ms ease;
   }
 
   body {
